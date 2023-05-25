@@ -1,18 +1,11 @@
-function M = manyrotationsfactory(d,m,J,R)
+function M = manyrotationsfactory(d,m,J,Ra)
     m_J = length(J);
-    N = rotationsfactory(d, m - m_J);
-    N.retr = N.retr_polar;
-
-    M.dim = N.dim();
-    M.inner = N.inner;
-    M.norm = N.norm(x,d)^2;
-    M.proj = N.proj;
-    M.retr = N.retr;
-    M.rand = N.rand;
-    M.randvec =  N.randvec;
-    M.zerovec = N.zerovec;
-    M.lincomb = M.lincomb();
-    M.tangent = N.tangent();
-
-    M.tangent2ambient(X, S)
+    M = rotationsfactory(d, m - m_J);
+    M.retr = N.retr_polar;
+    M.J = J;
+    M.Ra = Ra;
+    M.add_anchors=@add_anchors;
+    function X = add_anchors(X)
+        cat(3,Ra,X)
+    end
 end
