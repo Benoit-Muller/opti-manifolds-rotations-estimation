@@ -6,8 +6,8 @@ function [f,g] = costgrad(data,X)
     Z = pagemtimes(X(data.I(data.A)),'transpose', data.H,'none');
     Z = pagemtimes(Z, X(data.J(data.A)));
     [p,P] = composite_Langevin_frac(data.k1,data.k2,data.c1,data.c2,data.q,Z);
-    f = sum(log(p),'all');
-    g = P(:)' * Z(:);
+    f = - sum(log(p),'all');
+    g = - P(:)' * Z(:);
 end
 
 function [p,P] = composite_Langevin_frac(k1,k2,c1,c2,q,Z)

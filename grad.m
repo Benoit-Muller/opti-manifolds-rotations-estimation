@@ -7,11 +7,16 @@ function g = grad(data,X)
     Z = pagemtimes(X(data.I(data.A)),'transpose', data.H,'none');
     Z = pagemtimes(Z, X(data.J(data.A)));
     P = frac(data.k1,data.k2,data.c1,data.c2,data.q,Z);
-    g = P(:)' * Z(:);
+    somme = permute(P,[2,3,1]) .* Z,3;
+    [~,~,M] = size(data.H);
+    g = zeros(size(X));
+    for k=(1+length(data.M.J)):M
+        g(:,:,data.I(k)) = g(:,:,data.I(k)) + somme(:,:,data.J(k));
+    end
 end
 
 function P = frac(k1,k2,c1,c2,q,Z)
     etz = exp(multitrace(Z));
-    P = (1-q)*k1/c1 * etz^k1 + q*k2/c2 * etz^k2;
-    P = P ./ ((1-q)/c1 * etz^k1 + q/c2 * etz^k2);
+    P = (1-q)*k1/c1 * etz.^k1 + q*k2/c2 * etz.^k2;
+    P = P ./ ((1-q)/c1 * etz.^k1 + q/c2 * etz.^k2);
 end
