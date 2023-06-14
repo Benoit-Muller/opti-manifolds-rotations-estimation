@@ -8,7 +8,9 @@ kappa1 = 5;
 kappa2 = 0;
 q = 0.8;
 problem = build_problem(d, m, ma, kappa1, kappa2, q);
-checkmanifold(problem.M);
+%checkmanifold(problem.M);
 
 %% Question 16
-checkgradient(problem);
+%checkgradient(problem);
+%saveas(gcf,'graphics/q16_checkgradient.pdf')
+checkhessian(problem);

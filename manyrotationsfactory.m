@@ -5,8 +5,12 @@ function M = manyrotationsfactory(d,m,J,Ra)
     M.retr = M.retr_polar;
     M.J = J;
     M.Ra = Ra;
-    M.add_anchors=@add_anchors;
+    M.add_anchors = @add_anchors;
     function X = add_anchors(X)
         X= cat(3,M.Ra,X);
+    end
+    M.add_zeros = @add_zeros;
+    function S = add_zeros(S)
+        S= cat(3,zeros(size(M.Ra)),S);
     end
 end

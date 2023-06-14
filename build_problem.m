@@ -5,6 +5,7 @@ function problem = build_problem(d, m, ma, kappa1, kappa2, q)
     problem.cost = @(X) cost(problem,M.add_anchors(X));
     problem.grad = @(X) grad(problem,M.add_anchors(X));
     problem.costgrad = @(X) costgrad(problem,M.add_anchors(X));
+    problem.hess = @(X,S) hess(problem,M.add_anchors(X),M.add_zeros(S));
 end
 
 
