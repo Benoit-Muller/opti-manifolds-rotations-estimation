@@ -1,5 +1,6 @@
 %% Question 10,11,12
 clear 
+fprintf("\n––– Question 10,11,12 –––\n")
 addpath '/Users/benoitmuller/Documents/GitHub/opti-manifolds-rotations-estimation/data generation'
 d = 3;
 m = 10;
@@ -8,9 +9,11 @@ kappa1 = 5;
 kappa2 = 0;
 q = 0.8;
 problem = build_problem(d, m, ma, kappa1, kappa2, q);
-%checkmanifold(problem.M);
+checkmanifold(problem.M);
 
 %% Question 16
-%checkgradient(problem);
-%saveas(gcf,'graphics/q16_checkgradient.pdf')
+fprintf("\n––– Question 16 –––\n")
+checkgradient(problem);
+saveas(gcf,'graphics/q16_checkgradient.pdf')
 checkhessian(problem);
+saveas(gcf,'graphics/q16_checkhessian.pdf')
