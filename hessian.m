@@ -1,4 +1,4 @@
-function h = hess(data,X,S)
+function h = hessian(data,X,S)
     % X: size (d,d,m)
     % S: size(d,d,m), is the skew part Omega of a tangent vector
     % H: size (d,d,M) with M=|E|
