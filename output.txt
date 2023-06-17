@@ -1,45 +1,49 @@
 ––– Question 10,11,12 –––
 Random tangent vector norm: 1 (should be 1).
 norm(v - v)_x = 0 (should be 0).
-<u, v>_x = -0.0174461, <v, u>_x = -0.0174461, difference = 0 (should be 0).
-<au+bv, z>_x = 0.222134, a<u, z>_x + b<v, z>_x = 0.222134, difference = -5.55112e-17 (should be 0).
-Norm of tangent vector minus its projection to tangent space: 2.23363e-16 (should be zero).
-dist(x, M.exp(x, v, t)) - abs(t)*M.norm(x, v) = 4.19302e-17 (t = 1.0e-08; should be zero for small enough t).
-dist(x, M.exp(x, v, t)) - abs(t)*M.norm(x, v) = -1.10862e-17 (t = 1.0e-07; should be zero for small enough t).
-dist(x, M.exp(x, v, t)) - abs(t)*M.norm(x, v) = -3.29337e-17 (t = 1.0e-06; should be zero for small enough t).
-dist(x, M.exp(x, v, t)) - abs(t)*M.norm(x, v) = 1.56311e-17 (t = 1.0e-05; should be zero for small enough t).
-dist(x, M.exp(x, v, t)) - abs(t)*M.norm(x, v) = -3.4193e-17 (t = 1.0e-04; should be zero for small enough t).
-dist(x, M.exp(x, v, t)) - abs(t)*M.norm(x, v) = 1.19262e-16 (t = 1.0e-03; should be zero for small enough t).
-dist(x, M.exp(x, v, t)) - abs(t)*M.norm(x, v) = 3.1225e-17 (t = 1.0e-02; should be zero for small enough t).
-dist(x, M.exp(x, v, t)) - abs(t)*M.norm(x, v) = -1.38778e-17 (t = 1.0e-01; should be zero for small enough t).
-dist(x, M.exp(x, v, t)) - abs(t)*M.norm(x, v) = -1.11022e-16 (t = 1.0e+00; should be zero for small enough t).
-dist(x, M.exp(x, v, t)) - abs(t)*M.norm(x, v) = -2.37674 (t = 1.0e+01; should be zero for small enough t).
+<u, v>_x = -0.0439727, <v, u>_x = -0.0439727, difference = 0 (should be 0).
+<au+bv, z>_x = -0.474625, a<u, z>_x + b<v, z>_x = -0.474625, difference = 0 (should be 0).
+Norm of tangent vector minus its projection to tangent space: 3.4059e-16 (should be zero).
+dist(x, M.exp(x, v, t)) - abs(t)*M.norm(x, v) = 3.91385e-18 (t = 1.0e-08; should be zero for small enough t).
+dist(x, M.exp(x, v, t)) - abs(t)*M.norm(x, v) = -3.82754e-17 (t = 1.0e-07; should be zero for small enough t).
+dist(x, M.exp(x, v, t)) - abs(t)*M.norm(x, v) = 1.47651e-17 (t = 1.0e-06; should be zero for small enough t).
+dist(x, M.exp(x, v, t)) - abs(t)*M.norm(x, v) = -3.54992e-17 (t = 1.0e-05; should be zero for small enough t).
+dist(x, M.exp(x, v, t)) - abs(t)*M.norm(x, v) = -1.48671e-17 (t = 1.0e-04; should be zero for small enough t).
+dist(x, M.exp(x, v, t)) - abs(t)*M.norm(x, v) = 2.60209e-18 (t = 1.0e-03; should be zero for small enough t).
+dist(x, M.exp(x, v, t)) - abs(t)*M.norm(x, v) = -1.56125e-17 (t = 1.0e-02; should be zero for small enough t).
+dist(x, M.exp(x, v, t)) - abs(t)*M.norm(x, v) = 1.38778e-17 (t = 1.0e-01; should be zero for small enough t).
+dist(x, M.exp(x, v, t)) - abs(t)*M.norm(x, v) = 0 (t = 1.0e+00; should be zero for small enough t).
+dist(x, M.exp(x, v, t)) - abs(t)*M.norm(x, v) = -0.440864 (t = 1.0e+01; should be zero for small enough t).
 Unless otherwise stated, M.vec seems to return real column vectors, as intended.
 Checking mat/vec are inverse pairs: 0, 0 (should be two zeros).
 Checking if vec is linear: 0 (should be zero).
 M.vecmatareisometries says true.
 If true, this should be zero: 0.
 Testing M.dim() (works best when dimension is small):
-	If this number is machine-precision zero, then M.dim() may be too large: 0.000899464
-	If this number is not machine-precision zero, then M.dim() may be too small: 8.26091e-17
+	If this number is machine-precision zero, then M.dim() may be too large: 0.00250314
+	If this number is not machine-precision zero, then M.dim() may be too small: 3.15455e-16
 It is recommended also to call checkretraction.
 
 ––– Question 16 –––
-The slope should be 2. It appears to be: 2.00001.
+
+Check Gradient:
+The slope should be 2. It appears to be: 1.99996.
 If it is far from 2, then directional derivatives might be erroneous.
 The residual should be 0, or very close. Residual: 0.
 If it is far from 0, then the gradient is not in the tangent space.
 In certain cases (e.g., hyperbolicfactory), the tangency test is inconclusive.
-The slope should be 3. It appears to be: 2.99938.
+
+Check Hessian:
+The slope should be 3. It appears to be: 3.00027.
 If it is far from 3, then directional derivatives,
 the gradient or the Hessian might be erroneous.
 Tangency residual should be zero, or very close; residual: 0.
 If it is far from 0, then the Hessian is not in the tangent space.
 ||a*H[d1] + b*H[d2] - H[a*d1+b*d2]|| should be zero, or very close.
-	Value: 4.61711e-15 (norm of H[a*d1+b*d2]: 17.5649)
+	Value: 7.61535e-15 (norm of H[a*d1+b*d2]: 26.5732)
 If it is far from 0, then the Hessian is not linear.
 <d1, H[d2]> - <H[d1], d2> should be zero, or very close.
-	Value: -2.50344 - -2.50344 = -4.44089e-16.
+	Value: -2.00099 - -2.00099 = 4.44089e-16.
 If it is far from 0, then the Hessian is not symmetric.
 
 
@@ -55,129 +59,213 @@ vector (it will be transformed to a tangent vector
 automatically).
 
 ––– Question 22 –––
-Initial cost : -681.418514
-Random cost  : -215.384533 +- 34.516908
+Initial cost : -613.499144
+Random cost  : -178.860899 +- 33.167655
 
 ––– Question 23 –––
-Initial MSE         : 10.742230
-Random MSE          : 10.815985 +- 1.881582
+Initial MSE         : 0.269445
+Random MSE          : 10.987357 +- 1.738104
 Expected random MSE : 10.5797 (= 2/3 * pi^2 + 4)  
 
 ––– Question 24 –––
+– Random initialization
+RGD:
 Last stepsize smaller than minimum allowed; options.minstepsize = 1e-10.
-Total time is 0.077855 [s] (excludes statsfun)
+Total time is 0.123085 [s] (excludes statsfun)
+RTR:
 Gradient norm tolerance reached; options.tolgradnorm = 1e-07.
-Total time is 0.302373 [s] (excludes statsfun)
+Total time is 0.325243 [s] (excludes statsfun)
+– Spectral initialization
+RGD:
 Last stepsize smaller than minimum allowed; options.minstepsize = 1e-10.
-Total time is 0.071670 [s] (excludes statsfun)
+Total time is 0.080341 [s] (excludes statsfun)
+RTR:
 Gradient norm tolerance reached; options.tolgradnorm = 1e-07.
-Total time is 0.162450 [s] (excludes statsfun)
+Total time is 0.225499 [s] (excludes statsfun)
 
 ––– Question 25 –––
+– Random initialization
+RGD:
  iter	               cost val	    grad. norm
-    0	-3.6953892758657876e+03	1.87023267e+02
-    1	-3.8876183833627947e+03	2.00620235e+02
-    2	-4.6268191620518201e+03	2.33188081e+02
-    3	-6.4657416626443519e+03	3.55678245e+02
-    4	-8.1820641161195363e+03	4.20314714e+02
-    5	-8.7672619845419849e+03	5.15349347e+02
-    6	-1.0146364599465131e+04	2.18579367e+02
-    7	-1.0313966941634591e+04	4.14845754e+02
-    8	-1.0853861686779166e+04	2.68832591e+02
-    9	-1.1102199093188710e+04	1.67831560e+02
-   10	-1.1203645405951949e+04	4.56485698e+01
-   11	-1.1209501841119896e+04	3.89786341e+01
-   12	-1.1215248732816146e+04	1.58341532e+01
-   13	-1.1217882981624280e+04	2.14062586e+01
-   14	-1.1219053227886203e+04	1.77808140e+01
-   15	-1.1220207554909966e+04	6.98353826e+00
-   16	-1.1220757775311135e+04	9.46484819e+00
-   17	-1.1220927836331759e+04	9.07948865e+00
-   18	-1.1221200148696103e+04	3.93594458e+00
-   19	-1.1221243608509469e+04	5.71828806e+00
-   20	-1.1221349604952331e+04	1.88134129e+00
-   21	-1.1221395231710290e+04	2.93584923e+00
-   22	-1.1221414561021849e+04	2.14026048e+00
-   23	-1.1221429501068080e+04	9.81819138e-01
-   24	-1.1221432612992201e+04	1.24177881e+00
-   25	-1.1221437922302506e+04	5.51046053e-01
-   26	-1.1221439422792479e+04	7.46870306e-01
-   27	-1.1221440859728762e+04	5.79937841e-01
-   28	-1.1221442030345026e+04	2.98677782e-01
-   29	-1.1221442488515737e+04	2.98334960e-01
-   30	-1.1221442836965520e+04	2.21537598e-01
-   31	-1.1221442993931032e+04	2.57940624e-01
-   32	-1.1221443204010342e+04	1.59502265e-01
-   33	-1.1221443208468887e+04	2.39658638e-01
-   34	-1.1221443225873747e+04	2.28138490e-01
-   35	-1.1221443288320395e+04	1.81550998e-01
-   36	-1.1221443398072968e+04	7.05053579e-02
-   37	-1.1221443417439841e+04	1.22630444e-01
-   38	-1.1221443464185710e+04	3.64362047e-02
-   39	-1.1221443471200915e+04	8.27401972e-02
-   40	-1.1221443489948972e+04	2.90527170e-02
-   41	-1.1221443492207367e+04	2.43588053e-02
-   42	-1.1221443494348550e+04	1.08950802e-02
-   43	-1.1221443495346895e+04	1.33491091e-02
-   44	-1.1221443495879348e+04	1.14112173e-02
-   45	-1.1221443496360560e+04	5.88703936e-03
-   46	-1.1221443496592106e+04	6.00122435e-03
-   47	-1.1221443496716294e+04	6.21147222e-03
-   48	-1.1221443496778082e+04	6.74549930e-03
-   49	-1.1221443496924110e+04	2.11285836e-03
-   50	-1.1221443496947395e+04	5.87288229e-03
-   51	-1.1221443497019573e+04	3.23055656e-03
-   52	-1.1221443497050206e+04	5.08617053e-04
-   53	-1.1221443497050997e+04	1.54940081e-04
-   54	-1.1221443497051056e+04	2.18713765e-04
-   55	-1.1221443497051201e+04	7.81670036e-05
-   56	-1.1221443497051256e+04	1.21489104e-04
-   57	-1.1221443497051308e+04	4.54671101e-05
-   58	-1.1221443497051310e+04	9.07920873e-05
-   59	-1.1221443497051318e+04	7.80978240e-05
-   60	-1.1221443497051338e+04	2.46098974e-05
-   61	-1.1221443497051339e+04	3.02452593e-05
-   62	-1.1221443497051343e+04	1.51602649e-05
-   63	-1.1221443497051347e+04	3.84817763e-05
-   64	-1.1221443497051347e+04	2.50350237e-05
-   65	-1.1221443497051347e+04	1.51910355e-05
-   66	-1.1221443497051350e+04	2.39811017e-05
-   67	-1.1221443497051352e+04	3.15368015e-06
-   68	-1.1221443497051352e+04	2.54889619e-06
-   69	-1.1221443497051352e+04	5.53929273e-06
-   70	-1.1221443497051352e+04	5.53929273e-06
+    0	-3.7398271280480676e+03	2.09791450e+02
+    1	-3.9539106630226988e+03	2.22391339e+02
+    2	-4.7518254774595607e+03	2.50344081e+02
+    3	-6.4292086195496504e+03	2.81201287e+02
+    4	-7.5165452974892560e+03	4.58735524e+02
+    5	-9.1379955504247118e+03	3.36129778e+02
+    6	-9.1778855328478039e+03	4.27051603e+02
+    7	-9.3311835446637087e+03	3.94392382e+02
+    8	-9.8234091830099405e+03	2.61501030e+02
+    9	-1.0212717052843524e+04	2.62860583e+02
+   10	-1.0284683478181236e+04	3.16423464e+02
+   11	-1.0518012765308409e+04	1.98183200e+02
+   12	-1.0609578408103278e+04	1.24430513e+02
+   13	-1.0637310000931062e+04	8.80024819e+01
+   14	-1.0663433556669836e+04	8.67961790e+00
+   15	-1.0663775761770579e+04	6.39974683e+00
+   16	-1.0663915875291408e+04	8.41092766e+00
+   17	-1.0664170826403160e+04	3.39214112e+00
+   18	-1.0664245788664924e+04	5.31365987e+00
+   19	-1.0664318223231903e+04	3.81950718e+00
+   20	-1.0664364332288162e+04	2.46434168e+00
+   21	-1.0664372032939624e+04	3.20219241e+00
+   22	-1.0664396008565647e+04	1.83155890e+00
+   23	-1.0664402171402506e+04	2.18322998e+00
+   24	-1.0664417585236381e+04	7.64488966e-01
+   25	-1.0664424220961922e+04	1.16222393e+00
+   26	-1.0664428165614570e+04	7.27141451e-01
+   27	-1.0664428516418722e+04	9.43472719e-01
+   28	-1.0664429753476905e+04	7.22544589e-01
+   29	-1.0664431356016055e+04	4.26752468e-01
+   30	-1.0664432101460281e+04	2.50284109e-01
+   31	-1.0664432293499951e+04	4.68508890e-01
+   32	-1.0664432856298758e+04	2.26712981e-01
+   33	-1.0664433039417616e+04	1.81208154e-01
+   34	-1.0664433160744728e+04	1.49349773e-01
+   35	-1.0664433245802509e+04	1.18802511e-01
+   36	-1.0664433297933740e+04	1.09761877e-01
+   37	-1.0664433345449954e+04	6.22513588e-02
+   38	-1.0664433353156557e+04	1.22818642e-01
+   39	-1.0664433379105209e+04	8.44194428e-02
+   40	-1.0664433403413190e+04	3.01478015e-02
+   41	-1.0664433410327376e+04	5.40125038e-02
+   42	-1.0664433418075057e+04	3.15820940e-02
+   43	-1.0664433421667223e+04	1.40281243e-02
+   44	-1.0664433423227470e+04	1.77847981e-02
+   45	-1.0664433424332401e+04	1.20384223e-02
+   46	-1.0664433424657334e+04	1.55646204e-02
+   47	-1.0664433425449155e+04	5.32130763e-03
+   48	-1.0664433425650803e+04	1.42763351e-02
+   49	-1.0664433426196229e+04	5.05092686e-03
+   50	-1.0664433426234082e+04	3.81425124e-03
+   51	-1.0664433426259051e+04	2.71147272e-03
+   52	-1.0664433426282010e+04	5.40174972e-04
+   53	-1.0664433426284204e+04	7.48892895e-04
+   54	-1.0664433426286219e+04	3.36455188e-04
+   55	-1.0664433426287078e+04	4.22770445e-04
+   56	-1.0664433426287718e+04	2.74906421e-04
+   57	-1.0664433426287849e+04	4.03583260e-04
+   58	-1.0664433426288242e+04	2.17543715e-04
+   59	-1.0664433426288260e+04	3.24881138e-04
+   60	-1.0664433426288331e+04	2.90834935e-04
+   61	-1.0664433426288544e+04	1.50586490e-04
+   62	-1.0664433426288640e+04	9.92210107e-05
+   63	-1.0664433426288675e+04	1.57628832e-04
+   64	-1.0664433426288761e+04	4.86565076e-05
+   65	-1.0664433426288771e+04	1.39702245e-04
+   66	-1.0664433426288806e+04	8.84593266e-05
+   67	-1.0664433426288826e+04	3.99676557e-05
+   68	-1.0664433426288828e+04	1.96674734e-05
+   69	-1.0664433426288828e+04	1.23738146e-05
+   70	-1.0664433426288828e+04	2.57938914e-05
+   71	-1.0664433426288830e+04	1.61112872e-05
+   72	-1.0664433426288830e+04	2.08182228e-05
+   73	-1.0664433426288830e+04	1.83236188e-05
+   74	-1.0664433426288830e+04	1.83236188e-05
 Last stepsize smaller than minimum allowed; options.minstepsize = 1e-10.
-Total time is 1.242121 [s] (excludes statsfun)
+Total time is 1.295510 [s] (excludes statsfun)
+RTR:
            iter                  cost val     grad. norm    numinner     hessvec   numstored   stopreason
-              0   -3.6953892758657876e+03   1.870233e+02
-acc TR+       1   -4.1808759009897385e+03   2.121539e+02           1           1           1   negative curvature
-acc TR+       2   -5.1744346983456999e+03   2.667419e+02           1           1           1   negative curvature
-acc           3   -7.1226369816145816e+03   3.465490e+02           1           1           1   negative curvature
-acc           4   -8.6471277918736578e+03   3.225162e+02           1           1           1   exceeded trust region
-acc           5   -9.4044305084433981e+03   4.191063e+02           1           1           1   exceeded trust region
-acc           6   -1.0435923479815032e+04   2.100901e+02           2           2           2   negative curvature
-acc TR-       7   -1.0840712416985532e+04   2.673240e+02           2           2           2   negative curvature
-acc TR+       8   -1.1167676290451522e+04   8.982553e+01           1           1           1   exceeded trust region
-acc           9   -1.1221226457027571e+04   7.299928e+00           4           4           3   reached target residual-kappa (linear)
-acc          10   -1.1221441748471070e+04   3.638734e-01           2           2           2   reached target residual-kappa (linear)
-acc          11   -1.1221443496444947e+04   1.189926e-02           4           4           3   reached target residual-kappa (linear)
-acc          12   -1.1221443497051303e+04   9.858595e-05           5           5           2   reached target residual-theta (superlinear)
-acc          13   -1.1221443497051350e+04   3.316158e-09          10          10           2   reached target residual-theta (superlinear)
-acc          14   -1.1221443497051354e+04   2.200645e-13          18          18           2   model increased
+              0   -3.7398271280480676e+03   2.097915e+02
+acc TR+       1   -4.2739141970600813e+03   2.325074e+02           1           1           1   negative curvature
+acc           2   -5.3099938534613420e+03   2.664084e+02           1           1           1   negative curvature
+acc           3   -6.4441296709153876e+03   2.632758e+02           1           1           1   negative curvature
+acc           4   -7.5191470456492461e+03   2.842954e+02           1           1           1   negative curvature
+acc           5   -8.5702196735958696e+03   2.904819e+02           1           1           1   negative curvature
+acc           6   -9.6073202956463283e+03   3.262754e+02           1           1           1   negative curvature
+acc           7   -1.0386996448760754e+04   2.031628e+02           1           1           1   exceeded trust region
+acc           8   -1.0641515970226856e+04   7.039031e+01           2           2           2   exceeded trust region
+acc           9   -1.0663974769081411e+04   7.031257e+00           3           3           2   reached target residual-kappa (linear)
+acc          10   -1.0664432620659991e+04   4.087614e-01           4           4           3   reached target residual-kappa (linear)
+acc          11   -1.0664433417335167e+04   3.136787e-02           2           2           2   reached target residual-kappa (linear)
+acc          12   -1.0664433426288113e+04   3.882955e-04           5           5           2   reached target residual-theta (superlinear)
+acc          13   -1.0664433426288830e+04   1.423637e-07           9           9           2   reached target residual-theta (superlinear)
+acc          14   -1.0664433426288831e+04   2.228893e-13          17          17           2   reached target residual-theta (superlinear)
 Gradient norm tolerance reached; options.tolgradnorm = 1.28205e-09.
-Total time is 62.696471 [s] (excludes statsfun)
+Total time is 50.915837 [s] (excludes statsfun)
+– Spectral initialization
+RGD:
+ iter	               cost val	    grad. norm
+    0	-1.0661731601652784e+04	2.37580163e+01
+    1	-1.0664069579250689e+04	8.31128548e+00
+    2	-1.0664325718339405e+04	2.69336100e+00
+    3	-1.0664345335592683e+04	3.73405184e+00
+    4	-1.0664392170351413e+04	1.19553838e+00
+    5	-1.0664414543394791e+04	1.71872228e+00
+    6	-1.0664425309472463e+04	5.68508310e-01
+    7	-1.0664426948984847e+04	1.23354546e+00
+    8	-1.0664431321853708e+04	4.40078130e-01
+    9	-1.0664432030119904e+04	3.51937961e-01
+   10	-1.0664432470018954e+04	2.95006933e-01
+   11	-1.0664432804086850e+04	2.06688432e-01
+   12	-1.0664432921514057e+04	2.68565035e-01
+   13	-1.0664433171743618e+04	8.98414393e-02
+   14	-1.0664433351711381e+04	1.56014948e-01
+   15	-1.0664433422354658e+04	3.39451598e-02
+   16	-1.0664433425679428e+04	9.44966420e-03
+   17	-1.0664433425947602e+04	5.52217075e-03
+   18	-1.0664433426070120e+04	3.27503386e-03
+   19	-1.0664433426099366e+04	6.04160280e-03
+   20	-1.0664433426187519e+04	3.15428466e-03
+   21	-1.0664433426225447e+04	1.83973927e-03
+   22	-1.0664433426228621e+04	3.50542370e-03
+   23	-1.0664433426240299e+04	2.94593795e-03
+   24	-1.0664433426267933e+04	8.56259686e-04
+   25	-1.0664433426276726e+04	1.69935470e-03
+   26	-1.0664433426277872e+04	1.69734568e-03
+   27	-1.0664433426281874e+04	1.26467874e-03
+   28	-1.0664433426285219e+04	8.32379181e-04
+   29	-1.0664433426286945e+04	5.10417996e-04
+   30	-1.0664433426287113e+04	5.79700548e-04
+   31	-1.0664433426287676e+04	4.03968553e-04
+   32	-1.0664433426287686e+04	4.93550340e-04
+   33	-1.0664433426287724e+04	4.82036855e-04
+   34	-1.0664433426287862e+04	4.32755565e-04
+   35	-1.0664433426288291e+04	2.40995702e-04
+   36	-1.0664433426288302e+04	3.18971444e-04
+   37	-1.0664433426288346e+04	2.97942549e-04
+   38	-1.0664433426288493e+04	2.09876829e-04
+   39	-1.0664433426288526e+04	2.41404523e-04
+   40	-1.0664433426288635e+04	1.59410821e-04
+   41	-1.0664433426288724e+04	8.17968886e-05
+   42	-1.0664433426288750e+04	8.45945997e-05
+   43	-1.0664433426288762e+04	1.03220522e-04
+   44	-1.0664433426288795e+04	3.78163978e-05
+   45	-1.0664433426288804e+04	6.09729079e-05
+   46	-1.0664433426288817e+04	3.92164790e-05
+   47	-1.0664433426288817e+04	6.20311096e-05
+   48	-1.0664433426288822e+04	1.98145535e-05
+   49	-1.0664433426288824e+04	2.26861423e-05
+   50	-1.0664433426288826e+04	8.76620191e-06
+   51	-1.0664433426288830e+04	2.33294923e-05
+   52	-1.0664433426288831e+04	3.07750903e-06
+   53	-1.0664433426288833e+04	1.81075874e-06
+   54	-1.0664433426288833e+04	1.80887752e-06
+   55	-1.0664433426288833e+04	1.80887752e-06
 Last stepsize smaller than minimum allowed; options.minstepsize = 1e-10.
-Total time is 0.477573 [s] (excludes statsfun)
+Total time is 0.919982 [s] (excludes statsfun)
+RTR:
+           iter                  cost val     grad. norm    numinner     hessvec   numstored   stopreason
+              0   -1.0661731601652784e+04   2.375802e+01
+acc           1   -1.0664333462061655e+04   2.355942e+00           2           2           2   reached target residual-kappa (linear)
+acc           2   -1.0664433369687322e+04   1.097383e-01           4           4           3   reached target residual-kappa (linear)
+acc           3   -1.0664433425505234e+04   8.202619e-03           2           2           2   reached target residual-kappa (linear)
+acc           4   -1.0664433426288826e+04   1.683914e-05           6           6           3   reached target residual-theta (superlinear)
+acc           5   -1.0664433426288830e+04   1.194496e-10          12          12           2   reached target residual-theta (superlinear)
 Gradient norm tolerance reached; options.tolgradnorm = 1.28205e-09.
-Total time is 44.680423 [s] (excludes statsfun)
+Total time is 25.901757 [s] (excludes statsfun)
 
 ––– Question 26 –––
            iter                  cost val     grad. norm    numinner     hessvec   numstored   stopreason
-              0   -1.0252796754887306e+04   1.867363e+01
-acc           1   -1.0254489540861090e+04   1.163628e+00           4           4           2   reached target residual-kappa (linear)
-acc           2   -1.0254497149084335e+04   1.015012e-01           4           4           2   reached target residual-kappa (linear)
-acc           3   -1.0254497202385504e+04   8.865644e-03           4           4           2   reached target residual-kappa (linear)
-acc           4   -1.0254497202841038e+04   1.740004e-05           6           6           2   reached target residual-theta (superlinear)
-acc           5   -1.0254497202841041e+04   1.679171e-10          14          14           2   reached target residual-theta (superlinear)
-Gradient norm tolerance reached; options.tolgradnorm = 1.41643e-09.
-Total time is 30.565664 [s] (excludes statsfun)
+              0   -8.2999608429185573e+03   1.877275e+01
+acc           1   -8.3021638149074188e+03   1.594723e+00           4           4           2   reached target residual-kappa (linear)
+acc           2   -8.3021864095025539e+03   4.638027e-02           5           5           3   reached target residual-kappa (linear)
+acc           3   -8.3021864233978558e+03   1.551893e-03           5           5           3   reached target residual-theta (superlinear)
+acc           4   -8.3021864234140667e+03   8.711611e-07           8           8           2   reached target residual-theta (superlinear)
+acc           5   -8.3021864234140667e+03   4.069927e-13          17          17           3   reached target residual-theta (superlinear)
+Gradient norm tolerance reached; options.tolgradnorm = 1.72712e-09.
+Total time is 29.424647 [s] (excludes statsfun)
+
+––– Question 27 –––
+1/2
+2/2

@@ -1,9 +1,10 @@
-%% Question 10,11,12
-
+addpath '/Users/benoitmuller/Documents/GitHub/opti-manifolds-rotations-estimation/data generation'
 clear
 rng(05011998)
+
+%% Question 10,11,12
+
 fprintf("\n––– Question 10,11,12 –––\n")
-addpath '/Users/benoitmuller/Documents/GitHub/opti-manifolds-rotations-estimation/data generation'
 d = 3;
 m = 10;
 ma = 1;
@@ -18,16 +19,19 @@ checkmanifold(prob.M);
 %% Question 16
 
 fprintf("\n––– Question 16 –––\n")
+fprintf("\nCheck Gradient:\n")
 checkgradient(prob);
-saveas(gcf,'graphics/q16_checkgradient.pdf')
+print("graphics/q16_checkgradient", '-depsc')
+fprintf("\nCheck Hessian:\n")
+figure()
 checkhessian(prob);
-saveas(gcf,'graphics/q16_checkhessian.pdf')
+print('graphics/q16_checkhessian', '-depsc')
 
 %% Question 22
 
 fprintf("\n––– Question 22 –––\n")
 
-X0 = initialization(prob);
+X0 = prob.init();
 cost0 = prob.cost(X0);
 repeat=100;
 cost_random = zeros(repeat,1);
@@ -71,8 +75,11 @@ option = prob.option;
 option.debug = 0;
 option.verbosity =1;
 
-[~, ~, info_rgd, option_rgd] = steepestdescent(prob, X0, option);
-[~, ~, info_rtr, option_rtr] = trustregions(prob, X0, option);
+disp("– Random initialization")
+disp("RGD:")
+[~, ~, info_rgd, ~] = steepestdescent(prob, X0, option);
+disp("RTR:")
+[~, ~, info_rtr, ~] = trustregions(prob, X0, option);
 
 % d) Plot the norm of the gradient
 figure()
@@ -87,7 +94,7 @@ legend("RGD",sprintf("linear interpolation of slope %f",p(1)),"RTR")
 xlabel("Iteration")
 ylabel("Gradient norm")
 hold off
-saveas(gcf,'graphics/q24d.pdf')
+print('graphics/q24d', '-depsc')
 
 % e) Plot the function value
 figure()
@@ -99,19 +106,37 @@ legend("RGD","RTR")
 xlabel("Iteration")
 ylabel("Loglikelyhood")
 hold off
-saveas(gcf,'graphics/q24e.pdf')
+print('graphics/q24e', '-depsc')
+
+% e) Plot the function value + min reached
+
+step = min([min([info_rgd.cost]), min([info_rtr.cost])]);
+figure()
+semilogy([info_rgd.iter], [info_rgd.cost]-step,'.-');
+p = polyfit([info_rgd.iter], log([info_rgd.cost]-step+ eps()),1);
+line = exp(polyval(p,[info_rgd.iter]));
+hold on;
+semilogy([info_rgd.iter], line);
+semilogy([info_rtr.iter], [info_rtr.cost]-step,'.-');
+semilogy([info_rgd.iter],0*[info_rgd.iter]+ cost(prob,prob.R)-step)
+title("Question 24.e)", sprintf("Convergence of the loglikelyhood (plus %f) for random initialization",-step))
+legend("RGD",sprintf("linear interpolation of slope %f",p(1)),"RTR","Cost of true R")
+xlabel("Iteration")
+ylabel("Loglikelyhood minus a constant")
+hold off
+print('graphics/q24e_step', '-depsc')
 
 % Plot the MSE
 figure()
-plot([info_rgd.iter], [info_rgd.mse],'.-');
+semilogy([info_rgd.iter], [info_rgd.mse],'.-');
 hold on;
-plot([info_rtr.iter], [info_rtr.mse],'.-');
+semilogy([info_rtr.iter], [info_rtr.mse],'.-');
 title("Question 24.mse", "Convergence of the mse for random initialization")
 legend("RGD","RTR")
 xlabel("Iteration")
 ylabel("MSE")
 hold off
-saveas(gcf,'graphics/q24mse.pdf')
+print('graphics/q24mse', '-depsc')
 
 %% f) Use the spectral initialization
 X0 = prob.init();
@@ -121,8 +146,11 @@ option = prob.option;
 option.debug = 0;
 option.verbosity =1;
 
-[~, ~, info, option_rgd] = steepestdescent(prob, X0, option);
-[~, ~, info_rtr, option_rtr] = trustregions(prob, X0, option);
+disp("– Spectral initialization")
+disp("RGD:")
+[~, ~, info_rgd, ~] = steepestdescent(prob, X0, option);
+disp("RTR:")
+[~, ~, info_rtr, ~] = trustregions(prob, X0, option);
 
 % h) Plot the norm of the gradient and function value
 
@@ -134,36 +162,41 @@ line = exp(polyval(p,[info_rgd.iter]));
 hold on;
 semilogy([info_rgd.iter], line);
 semilogy([info_rtr.iter], [info_rtr.gradnorm],'.-');
-title("Question 24.h)", "Convergence of the gradient norm for guessed initialization")
+title("Question 24.h)", "Convergence of the gradient norm for spectral initialization")
 legend("RGD",sprintf("linear interpolation of slope %f",p(1)),"RTR")
 xlabel("Iteration")
 ylabel("Gradient norm")
 hold off
-saveas(gcf,'graphics/q24h_grad.pdf')
+print('graphics/q24h_grad', '-depsc')
 
 % Function
+step = min([min([info_rgd.cost]), min([info_rtr.cost])]);
 figure()
-plot([info_rgd.iter], -[info_rgd.cost],'.-');
+semilogy([info_rgd.iter], [info_rgd.cost]-step,'.-');
+p = polyfit([info_rgd.iter], log([info_rgd.cost]-step+ eps()),1);
+line = exp(polyval(p,[info_rgd.iter]));
 hold on;
-plot([info_rtr.iter], -[info_rtr.cost],'.-');
-title("Question 24.h)", "Convergence of the loglikelyhood for guessed initialization")
-legend("RGD","RTR")
+semilogy([info_rgd.iter], line);
+semilogy([info_rtr.iter], [info_rtr.cost]-step,'.-');
+semilogy([info_rgd.iter],0*[info_rgd.iter]+ cost(prob,prob.R)-step)
+title("Question 24.h)", sprintf("Convergence of the loglikelyhood (plus %f) for spectral initialization",-step))
+legend("RGD",sprintf("linear interpolation of slope %f",p(1)),"RTR","Cost of true R")
 xlabel("Iteration")
-ylabel("Loglikelyhood")
+ylabel("Loglikelyhood minus a constant")
 hold off
-saveas(gcf,'graphics/q24h_fun.pdf')
+print('graphics/q24h_fun', '-depsc')
 
 % MSE
 figure()
-plot([info_rgd.iter], [info_rgd.mse],'.-');
+semilogy([info_rgd.iter], [info_rgd.mse],'.-');
 hold on;
-plot([info_rtr.iter], [info_rtr.mse],'.-');
-title("Question 24.mse", "Convergence of the mse for guessed initialization")
+semilogy([info_rtr.iter], [info_rtr.mse],'.-');
+title("Question 24.h)", "Convergence of the MSE for spectral initialization")
 legend("RGD","RTR")
 xlabel("Iteration")
 ylabel("MSE")
 hold off
-saveas(gcf,'graphics/q24h_mse.pdf')
+print('graphics/q24h_mse', '-depsc')
 
 
 %% Question 25
@@ -182,9 +215,11 @@ X0 = prob.M.rand();
 option = prob.option;
 option.debug = 0;
 option.verbosity =2;
-
-[~, ~, info_rgd, option_rgd] = steepestdescent(prob, X0, option);
-[~, ~, info_rtr, option_rtr] = trustregions(prob, X0, option);
+disp("– Random initialization")
+disp("RGD:")
+[~, ~, info_rgd, ~] = steepestdescent(prob, X0, option);
+disp("RTR:")
+[~, ~, info_rtr, ~] = trustregions(prob, X0, option);
 
 % d) Plot the norm of the gradient
 figure()
@@ -199,19 +234,24 @@ legend("RGD",sprintf("linear interpolation of slope %f",p(1)),"RTR")
 xlabel("Iteration")
 ylabel("Gradient norm")
 hold off
-saveas(gcf,'graphics/q25d.pdf')
+print('graphics/q25d', '-depsc')
 
 % e) Plot the function value
+step = min([min([info_rgd.cost]), min([info_rtr.cost])]);
 figure()
-plot([info_rgd.iter], -[info_rgd.cost],'.-');
+semilogy([info_rgd.iter], [info_rgd.cost]-step,'.-');
+p = polyfit([info_rgd.iter], log([info_rgd.cost]-step+ eps()),1);
+line = exp(polyval(p,[info_rgd.iter]));
 hold on;
-plot([info_rtr.iter], -[info_rtr.cost],'.-');
-title("Question 25.e)", "Convergence of the loglikelyhood for random initialization")
-legend("RGD","RTR")
+semilogy([info_rgd.iter], line);
+semilogy([info_rtr.iter], [info_rtr.cost]-step,'.-');
+semilogy([info_rgd.iter],0*[info_rgd.iter]+ cost(prob,prob.R)-step)
+title("Question 25.h)", sprintf("Convergence of the loglikelyhood (plus %f) for random initialization",-step))
+legend("RGD",sprintf("linear interpolation of slope %f",p(1)),"RTR","Cost of true R")
 xlabel("Iteration")
-ylabel("Loglikelyhood")
+ylabel("Loglikelyhood minus a constant")
 hold off
-saveas(gcf,'graphics/q25e.pdf')
+print('graphics/q25e', '-depsc')
 
 % Plot the MSE
 figure()
@@ -223,7 +263,7 @@ legend("RGD","RTR")
 xlabel("Iteration")
 ylabel("MSE")
 hold off
-saveas(gcf,'graphics/q25mse.pdf')
+print('graphics/q25mse', '-depsc')
 
 %% f) Use the spectral initialization
 X0 = prob.init();
@@ -231,10 +271,12 @@ X0 = prob.init();
 % g) Run RGD and RTR
 option = prob.option;
 option.debug = 0;
-option.verbosity =1;
-
-[~, ~, info, option_rgd] = steepestdescent(prob, X0, option);
-[~, ~, info_rtr, option_rtr] = trustregions(prob, X0, option);
+option.verbosity =2;
+disp("– Spectral initialization")
+disp("RGD:")
+[~, ~, info_rgd, ~] = steepestdescent(prob, X0, option);
+disp("RTR:")
+[~, ~, info_rtr, ~] = trustregions(prob, X0, option);
 
 % h) Plot the norm of the gradient and function value
 
@@ -246,36 +288,41 @@ line = exp(polyval(p,[info_rgd.iter]));
 hold on;
 semilogy([info_rgd.iter], line);
 semilogy([info_rtr.iter], [info_rtr.gradnorm],'.-');
-title("Question 25.h)", "Convergence of the gradient norm for guessed initialization")
+title("Question 25.h)", "Convergence of the gradient norm for spectral initialization")
 legend("RGD",sprintf("linear interpolation of slope %f",p(1)),"RTR")
 xlabel("Iteration")
 ylabel("Gradient norm")
 hold off
-saveas(gcf,'graphics/q25h_grad.pdf')
+print('graphics/q25h_grad', '-depsc')
 
 % Function
+step = min([min([info_rgd.cost]), min([info_rtr.cost])]);
 figure()
-plot([info_rgd.iter], -[info_rgd.cost],'.-');
+semilogy([info_rgd.iter], [info_rgd.cost]-step,'.-');
+p = polyfit([info_rgd.iter], log([info_rgd.cost]-step+ eps()),1);
+line = exp(polyval(p,[info_rgd.iter]));
 hold on;
-plot([info_rtr.iter], -[info_rtr.cost],'.-');
-title("Question 25.h)", "Convergence of the loglikelyhood for guessed initialization")
-legend("RGD","RTR")
+semilogy([info_rgd.iter], line);
+semilogy([info_rtr.iter], [info_rtr.cost]-step,'.-');
+semilogy([info_rgd.iter],0*[info_rgd.iter]+ cost(prob,prob.R)-step)
+title("Question 26.h)", sprintf("Convergence of the loglikelyhood (plus %f) for spectral initialization",-step))
+legend("RGD",sprintf("linear interpolation of slope %f",p(1)),"RTR","Cost of true R")
 xlabel("Iteration")
-ylabel("Loglikelyhood")
+ylabel("Loglikelyhood minus a constant")
 hold off
-saveas(gcf,'graphics/q25h_fun.pdf')
+print('graphics/q25h_fun', '-depsc')
 
 % MSE
 figure()
 plot([info_rgd.iter], [info_rgd.mse],'.-');
 hold on;
 plot([info_rtr.iter], [info_rtr.mse],'.-');
-title("Question 25.mse", "Convergence of the mse for guessed initialization")
+title("Question 25.mse", "Convergence of the mse for spectral initialization")
 legend("RGD","RTR")
 xlabel("Iteration")
 ylabel("MSE")
 hold off
-saveas(gcf,'graphics/q25h_mse.pdf')
+print('graphics/q25h_mse', '-depsc')
 
 %% Question 26
 
@@ -293,33 +340,100 @@ option = prob.option;
 option.debug = 0;
 option.verbosity =2;
 
-[~, ~, info_rtr, option_rtr] = trustregions(prob, X0, option);
+[~, ~, info_rtr, ~] = trustregions(prob, X0, option);
 
 % h) Plot the norm of the gradient and function value
 
 % Gradient
 figure()
 semilogy([info_rtr.iter], [info_rtr.gradnorm],'.-');
-title("Question 26.h)", "RTR: Convergence of the gradient norm for guessed initialization")
+title("Question 26.h)", "RTR: Convergence of the gradient norm for spectral initialization")
 xlabel("Iteration")
 ylabel("Gradient norm")
-saveas(gcf,'graphics/q26h_grad.pdf')
+print('graphics/q26h_grad', '-depsc')
 
 % Function
 figure()
 plot([info_rtr.iter], -[info_rtr.cost],'.-');
-title("Question 26.h)", "RTR: Convergence of the loglikelyhood for guessed initialization")
+hold on;
+plot([info_rtr.iter],0*[info_rtr.iter]+ cost(prob,prob.R))
+legend("RTR","cost of true R")
+title("Question 26.h)", "RTR: Convergence of the loglikelyhood for spectral initialization")
 xlabel("Iteration")
 ylabel("Loglikelyhood")
-saveas(gcf,'graphics/q26h_fun.pdf')
+print('graphics/q26h_fun', '-depsc')
 
 % MSE
 figure()
 plot([info_rtr.iter], [info_rtr.mse],'.-');
-title("Question 26.mse", "RTR: Convergence of the mse for guessed initialization")
+title("Question 26.mse", "RTR: Convergence of the mse for spectral initialization")
 xlabel("Iteration")
 ylabel("MSE")
 hold off
-saveas(gcf,'graphics/q26h_mse.pdf')
+print('graphics/q26h_mse', '-depsc')
+
+%% Question 27
+
+fprintf("\n––– Question 27 –––\n")
+% Generate a synthetic problem
+clear
+d=3; m=20; ma=5; kappa1=10; kappa2=0; G="E-R";
+qq = linspace(0.5,1,5);
+repeat = 2;
+for j=1:repeat
+    fprintf("%i/%i\n",j,repeat)
+    for i=1:length(qq)
+        prob = build_problem(d, m, ma, kappa1, kappa2, qq(i), G);
+        option = prob.option;
+        option.verbosity =0;
+        [X, ~, info, ~] = trustregions(prob, prob.M.rand(), option);
+        if info(end).gradnorm > option.tolgradnorm
+            warn("RTR did not reach Gradient norm tolerance")
+        end
+        rand(i,j) = prob.cost(X);
+        [X, ~, info, ~] = trustregions(prob, prob.init(), option);
+        if info(end).gradnorm > option.tolgradnorm
+            warn("RTR did not reach Gradient norm tolerance")
+        end
+        init(i,j) = prob.cost(X);
+    end
+end
+diff = rand-init;
+%%
+alpha=0.05;
+[sigma.rand,mu.rand] = std(rand,0,2);
+[sigma.init,mu.init] = std(init,0,2);
+[sigma.diff,mu.diff] = std(diff,0,2);
+
+figure()
+
+p = plot(qq,mu.rand,'.-'); hold on;
+col= p.Color;
+interval1 = mu.rand + sigma.rand * norminv(1-alpha/2)/sqrt(repeat) ;
+interval2 = mu.rand - sigma.rand * norminv(1-alpha/2)/sqrt(repeat) ;
+qq1 = [qq, fliplr(qq)];
+inBetween = [interval1', fliplr(interval2')];
+fill(qq1, inBetween, col,'FaceAlpha',0.3,"EdgeColor","none");
+
+p=plot(qq,mu.init,'.-');
+col= p.Color;
+interval1 = mu.init + sigma.init * norminv(1-alpha/2)/sqrt(repeat) ;
+interval2 = mu.init - sigma.init * norminv(1-alpha/2)/sqrt(repeat)  ;
+inBetween = [interval1', fliplr(interval2')];
+fill(qq1, inBetween, col,'FaceAlpha',0.1,"EdgeColor","none");
+
+
+p=plot(qq,mu.diff,'.-');
+col= p.Color;
+interval1 = mu.diff + sigma.diff * norminv(1-alpha/2)/sqrt(repeat) ;
+interval2 = mu.diff - sigma.diff * norminv(1-alpha/2)/sqrt(repeat)  ;
+inBetween = [interval1', fliplr(interval2')];
+fill(qq1, inBetween, col,'FaceAlpha',0.1,"EdgeColor","none");
+
+legend("random","","spectral","","difference","")
+title("Question 27.a : Cost of RTR according to noise",sprintf("Confidence interval %g",alpha))
+xlabel("q")
+ylabel("cost")
+print('graphics/q27a', '-depsc')
 
 

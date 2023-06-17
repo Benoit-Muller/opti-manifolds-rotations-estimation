@@ -4,7 +4,6 @@ function X = initialization(data)
     d = data.d;
     I=data.I;
     J=data.J;
-    tol = 1e-3;
     D = spdiags(data.deg, 0, m, m);
     D1 = kron(D,speye(d));
     W = zeros(d*m, d*m);
@@ -15,6 +14,7 @@ function X = initialization(data)
     W = W + W';
     [Y,S] = eigs(W, D1, d);
     Y = Y*sqrt(trace(D));
+    tol = 1e-6; % tolerance for assertions
     assert(norm(W*Y-D1*Y*S) < tol) % GEP
     assert(norm(Y'*D1*Y - trace(D)*eye(d)) < tol) % feasibility
     Xa = zeros(d,d,m);

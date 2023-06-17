@@ -1,7 +1,8 @@
 function M = manyrotationsfactory(d,m,J,Ra)
-% anchors must be in the first indices, i.e. J = 1:m_J
-    m_J = length(J);
-    M = rotationsfactory(d, m - m_J);
+% anchors must be in the first indices, i.e. J = 1:m_a
+    assert(all(J==(1:max(J))));
+    m_a = length(J);
+    M = rotationsfactory(d, m - m_a);
     M.retr = M.retr_polar;
     M.J = J;
     M.Ra = Ra;

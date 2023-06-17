@@ -21,7 +21,6 @@ function problem = build_problem(d, m, ma, kappa1, kappa2, q, G)
     problem.option.Delta0 = problem.option.Delta_bar / 8;
     problem.option.statsfun = statsfunhelper('mse', @(X) problem.MSE(X));
     problem.option.tolgradnorm = 1e-6 / problem.cardE;
-    problem.options.minstepsize = 0;
 end
 
 
@@ -56,7 +55,7 @@ function data = build_data(d, m, ma, kappa1, kappa2, q, G)
     % graph:
     switch G
         case "E-R"
-            ERp = 0.9;
+            ERp = 0.75;
             [I, J] = erdosrenyi(m, ERp);
             cardE = length(I);
         case "complete"

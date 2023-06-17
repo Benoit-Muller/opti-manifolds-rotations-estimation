@@ -4,7 +4,7 @@ function mse = MSE(data,X)
     ma = data.ma;
     mse = 0;
     for i=1:m-ma
-        arg = data.R(:,:,ma-1+i)' * X(:,:,i);
+        arg = data.R(:,:,ma+i)' * X(:,:,i);
         mse = mse + norm(logm(arg),"fro")^2;
     end
     mse = mse/(m-ma);
