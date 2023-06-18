@@ -378,7 +378,8 @@ fprintf("\n––– Question 27 –––\n")
 % Generate a synthetic problem
 clear
 d=3; m=10; ma=1; kappa1=100; kappa2=0; G="complete";
-qq = linspace(0,1,5);
+a=0; b=1; n=3;
+qq = a+(b-a)*(logspace(0,1,5)-1)/9;
 repeat = 5;
 for i=1:length(qq)
     fprintf("%i/%i\n",i,length(qq))
@@ -388,6 +389,8 @@ for i=1:length(qq)
     option.tolgradnorm = 1e-3;
     for j=1:repeat
         fprintf("               %i/%i\n",j,repeat)
+        X0 = prob.M.rand();
+        dum(i,j) = prob.MSE(X0);
         [X, ~, info, ~] = trustregions(prob, prob.M.rand(), option);
         if info(end).gradnorm > option.tolgradnorm
             warn("RTR did not reach Gradient norm tolerance")
@@ -402,41 +405,50 @@ for i=1:length(qq)
 end
 
 %%
-diff = (rand-init);
+%diff = (rand-init);
 alpha=0.05;
-%[sigma.rand,mu.rand] = std(rand,0,2);
+[sigma.dum,mu.dum] = std(dum,0,2);
+[sigma.rand,mu.rand] = std(rand,0,2);
 %[sigma.init,mu.init] = std(init,0,2);
-[sigma.diff,mu.diff] = std(diff,0,2);
+%[sigma.diff,mu.diff] = std(diff,0,2);
 
 figure()
 
-% p = plot(qq,mu.rand,'.-.'); hold on;
-% col= p.Color;
-% interval1 = mu.rand + sigma.rand * norminv(1-alpha/2)/sqrt(repeat) ;
-% interval2 = mu.rand - sigma.rand * norminv(1-alpha/2)/sqrt(repeat) ;
-% qq1 = [qq, fliplr(qq)];
-% inBetween = [interval1', fliplr(interval2')];
-% fill(qq1, inBetween, col,'FaceAlpha',0.3,"EdgeColor","none");
-% 
-% p=plot(qq,init,'.-');
-%col= p.Color;
-%interval1 = mu.init + sigma.init * norminv(1-alpha/2)/sqrt(repeat) ;
-%interval2 = mu.init - sigma.init * norminv(1-alpha/2)/sqrt(repeat)  ;
-%inBetween = [interval1', fliplr(interval2')];
-%fill(qq1, inBetween, col,'FaceAlpha',0.1,"EdgeColor","none");
-
-
-p = plot(qq,mu.diff,'.-');
-hold on
-col = p.Color;
+p = plot(qq,mu.dum,'.-'); hold on;
+col= p.Color;
+interval1 = mu.dum + sigma.dum * norminv(1-alpha/2)/sqrt(repeat) ;
+interval2 = mu.dum - sigma.dum * norminv(1-alpha/2)/sqrt(repeat) ;
 qq1 = [qq, fliplr(qq)];
-interval1 = mu.diff + sigma.diff * norminv(1-alpha/2)/sqrt(repeat) ;
-interval2 = mu.diff - sigma.diff * norminv(1-alpha/2)/sqrt(repeat)  ;
 inBetween = [interval1', fliplr(interval2')];
-fill(qq1, inBetween, col,'FaceAlpha',0.1,"EdgeColor","none");
+fill(qq1, inBetween, col,'FaceAlpha',0.3,"EdgeColor","none");
 
-legend("diff","")
-title("Question 27.a : Cost of RTR according to noise",sprintf("Confidence interval %g",alpha))
+p = plot(qq,mu.rand,'.-'); hold on;
+col= p.Color;
+interval1 = mu.rand + sigma.rand * norminv(1-alpha/2)/sqrt(repeat) ;
+interval2 = mu.rand - sigma.rand * norminv(1-alpha/2)/sqrt(repeat) ;
+qq1 = [qq, fliplr(qq)];
+inBetween = [interval1', fliplr(interval2')];
+fill(qq1, inBetween, col,'FaceAlpha',0.3,"EdgeColor","none");
+
+p=plot(qq,init,'.-');
+% col= p.Color;
+% interval1 = mu.init + sigma.init * norminv(1-alpha/2)/sqrt(repeat) ;
+% interval2 = mu.init - sigma.init * norminv(1-alpha/2)/sqrt(repeat)  ;
+% inBetween = [interval1', fliplr(interval2')];
+% fill(qq1, inBetween, col,'FaceAlpha',0.1,"EdgeColor","none");
+
+
+% p = plot(qq,mu.diff,'.-');
+% hold on
+% col = p.Color;
+% qq1 = [qq, fliplr(qq)];
+% interval1 = mu.diff + sigma.diff * norminv(1-alpha/2)/sqrt(repeat) ;
+% interval2 = mu.diff - sigma.diff * norminv(1-alpha/2)/sqrt(repeat)  ;
+% inBetween = [interval1', fliplr(interval2')];
+% fill(qq1, inBetween, col,'FaceAlpha',0.1,"EdgeColor","none");
+
+legend("Random","","Random + TRT","","Spectral + TRT")
+title("Question 27.a : MSE of RTR according to noise",sprintf("Confidence interval %g",alpha))
 xlabel("q")
 ylabel("cost")
 print('graphics/q27a', '-depsc')
