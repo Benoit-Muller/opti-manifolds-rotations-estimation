@@ -377,7 +377,7 @@ print('graphics/q26h_mse', '-depsc')
 fprintf("\n––– Question 27 –––\n")
 % Generate a synthetic problem
 clear
-d=3; m=10; ma=1; kappa1=100; kappa2=0; G="complete";
+d=3; m=40; ma=5; kappa1=100; kappa2=0; G="complete";
 qq = linspace(0,1,5);
 repeat = 5;
 for i=1:length(qq)
@@ -392,13 +392,13 @@ for i=1:length(qq)
         if info(end).gradnorm > option.tolgradnorm
             warn("RTR did not reach Gradient norm tolerance")
         end
-        rand(i,j) = prob.MSE(X);
+        rand(i,j) = prob.cost(X);
     end
     [X, ~, info, ~] = trustregions(prob, prob.init(), option);
     if info(end).gradnorm > option.tolgradnorm
         warn("RTR did not reach Gradient norm tolerance")
     end
-    init(i,1) = prob.MSE(X);
+    init(i,1) = prob.cost(X);
 end
 
 %%

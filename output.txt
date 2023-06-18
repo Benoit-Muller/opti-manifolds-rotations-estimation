@@ -70,18 +70,113 @@ Expected random MSE : 10.5797 (= 2/3 * pi^2 + 4)
 ––– Question 24 –––
 – Random initialization
 RGD:
+ iter	               cost val	    grad. norm
+    0	-8.4920229208292170e+01	3.46351803e+01
+    1	-1.1890825996919898e+02	3.72129759e+01
+    2	-2.0732059166344496e+02	5.98468359e+01
+    3	-3.2596193966806641e+02	3.10502553e+01
+    4	-3.2967879719084539e+02	3.83768229e+01
+    5	-3.4137133122304658e+02	2.24524226e+01
+    6	-3.4329790281117516e+02	2.33767394e+01
+    7	-3.4852016670710037e+02	8.89280535e+00
+    8	-3.4952928858068151e+02	5.51282206e+00
+    9	-3.4994826264820301e+02	3.58822303e+00
+   10	-3.5013337152651542e+02	2.33633215e+00
+   11	-3.5021530423459944e+02	1.63458904e+00
+   12	-3.5025404239760275e+02	1.02469642e+00
+   13	-3.5027124665327051e+02	8.00022639e-01
+   14	-3.5027144945486543e+02	1.17045074e+00
+   15	-3.5027224861423872e+02	1.13570086e+00
+   16	-3.5027524688729125e+02	9.95030770e-01
+   17	-3.5028363299171849e+02	4.11901227e-01
+   18	-3.5028564433161523e+02	1.80391433e-01
+   19	-3.5028623728978044e+02	2.31006097e-01
+   20	-3.5028677694614100e+02	5.92197909e-02
+   21	-3.5028679398262597e+02	1.05815569e-01
+   22	-3.5028685143249834e+02	7.26705947e-02
+   23	-3.5028690252391158e+02	1.34701129e-02
+   24	-3.5028690533620158e+02	1.02289713e-02
+   25	-3.5028690541200712e+02	1.50510805e-02
+   26	-3.5028690570496548e+02	1.40331627e-02
+   27	-3.5028690670117578e+02	9.85414562e-03
+   28	-3.5028690769496279e+02	2.33781922e-03
+   29	-3.5028690789213596e+02	2.59011543e-03
+   30	-3.5028690793927547e+02	1.39772659e-03
+   31	-3.5028690795719280e+02	3.94910249e-04
+   32	-3.5028690795874411e+02	2.14686977e-04
+   33	-3.5028690795924467e+02	1.58410146e-04
+   34	-3.5028690795940395e+02	1.57680902e-04
+   35	-3.5028690795964593e+02	6.25118210e-05
+   36	-3.5028690795969544e+02	4.05254600e-05
+   37	-3.5028690795971829e+02	2.56257327e-05
+   38	-3.5028690795972869e+02	1.91794557e-05
+   39	-3.5028690795973387e+02	1.12981263e-05
+   40	-3.5028690795973620e+02	9.64703164e-06
+   41	-3.5028690795973625e+02	1.33126852e-05
+   42	-3.5028690795973648e+02	1.24518311e-05
+   43	-3.5028690795973728e+02	8.80757680e-06
+   44	-3.5028690795973728e+02	9.77903072e-06
+   45	-3.5028690795973807e+02	2.91547117e-06
+   46	-3.5028690795973813e+02	3.90513763e-06
+   47	-3.5028690795973819e+02	1.01942788e-06
+   48	-3.5028690795973824e+02	1.59958798e-06
+   49	-3.5028690795973824e+02	2.09336608e-06
+   50	-3.5028690795973824e+02	1.02769430e-06
+   51	-3.5028690795973824e+02	1.02769430e-06
 Last stepsize smaller than minimum allowed; options.minstepsize = 1e-10.
-Total time is 0.123085 [s] (excludes statsfun)
+Total time is 0.251549 [s] (excludes statsfun)
 RTR:
+           iter                  cost val     grad. norm    numinner     hessvec   numstored   stopreason
+              0   -8.4920229208292170e+01   3.463518e+01
+acc TR+       1   -1.1474996989884797e+02   3.716505e+01           1           1           1   negative curvature
+acc TR+       2   -1.7176800183150183e+02   4.680043e+01           1           1           1   negative curvature
+acc           3   -2.9605850960951761e+02   5.114730e+01           1           1           1   negative curvature
+acc           4   -3.4705299460558865e+02   1.558892e+01           2           2           2   exceeded trust region
+acc           5   -3.5028658286035625e+02   1.662311e-01           3           3           2   reached target residual-kappa (linear)
+acc           6   -3.5028690795510408e+02   5.837019e-04           3           3           2   reached target residual-kappa (linear)
+acc           7   -3.5028690795973830e+02   3.367896e-07           5           5           3   reached target residual-theta (superlinear)
+acc           8   -3.5028690795973830e+02   8.337994e-14           7           7           2   reached target residual-theta (superlinear)
 Gradient norm tolerance reached; options.tolgradnorm = 1e-07.
-Total time is 0.325243 [s] (excludes statsfun)
+Total time is 0.396367 [s] (excludes statsfun)
 – Spectral initialization
 RGD:
+ iter	               cost val	    grad. norm
+    0	-3.5028638864625748e+02	1.88264971e-01
+    1	-3.5028647828801968e+02	1.91816502e-01
+    2	-3.5028675257013015e+02	1.02696655e-01
+    3	-3.5028686532868812e+02	3.83334143e-02
+    4	-3.5028688696932295e+02	3.10896445e-02
+    5	-3.5028689233920534e+02	3.45308890e-02
+    6	-3.5028690464928047e+02	8.39300162e-03
+    7	-3.5028690676062871e+02	1.05713652e-02
+    8	-3.5028690705161466e+02	9.36399032e-03
+    9	-3.5028690783103940e+02	3.21582162e-03
+   10	-3.5028690787057332e+02	2.80895197e-03
+   11	-3.5028690795122043e+02	4.06285799e-04
+   12	-3.5028690795824269e+02	3.59539435e-04
+   13	-3.5028690795949251e+02	1.24714941e-04
+   14	-3.5028690795955976e+02	1.20361375e-04
+   15	-3.5028690795970857e+02	2.51170607e-05
+   16	-3.5028690795971880e+02	4.25477804e-05
+   17	-3.5028690795973796e+02	4.30751720e-06
+   18	-3.5028690795973819e+02	2.77599259e-06
+   19	-3.5028690795973824e+02	1.58403500e-06
+   20	-3.5028690795973824e+02	1.67617210e-06
+   21	-3.5028690795973824e+02	1.35382196e-06
+   22	-3.5028690795973830e+02	1.65692343e-06
+   23	-3.5028690795973830e+02	1.65012178e-06
+   24	-3.5028690795973830e+02	1.65012178e-06
 Last stepsize smaller than minimum allowed; options.minstepsize = 1e-10.
-Total time is 0.080341 [s] (excludes statsfun)
+Total time is 0.144357 [s] (excludes statsfun)
 RTR:
+           iter                  cost val     grad. norm    numinner     hessvec   numstored   stopreason
+              0   -3.5028638864625748e+02   1.882650e-01
+acc           1   -3.5028690794850877e+02   9.784470e-04           3           3           2   reached target residual-kappa (linear)
+acc           2   -3.5028690795973830e+02   5.972383e-07           4           4           2   reached target residual-theta (superlinear)
+Between line above and below, cost function increased by 5.7e-14 (step size: 6.1e-08)
+acc           3   -3.5028690795973824e+02   8.784804e-15           9           9           3   reached target residual-theta (superlinear)
 Gradient norm tolerance reached; options.tolgradnorm = 1e-07.
-Total time is 0.225499 [s] (excludes statsfun)
+Total time is 0.283517 [s] (excludes statsfun)
 
 ––– Question 25 –––
 – Random initialization
@@ -163,7 +258,7 @@ RGD:
    73	-1.0664433426288830e+04	1.83236188e-05
    74	-1.0664433426288830e+04	1.83236188e-05
 Last stepsize smaller than minimum allowed; options.minstepsize = 1e-10.
-Total time is 1.295510 [s] (excludes statsfun)
+Total time is 1.251359 [s] (excludes statsfun)
 RTR:
            iter                  cost val     grad. norm    numinner     hessvec   numstored   stopreason
               0   -3.7398271280480676e+03   2.097915e+02
@@ -182,7 +277,7 @@ acc          12   -1.0664433426288113e+04   3.882955e-04           5           5
 acc          13   -1.0664433426288830e+04   1.423637e-07           9           9           2   reached target residual-theta (superlinear)
 acc          14   -1.0664433426288831e+04   2.228893e-13          17          17           2   reached target residual-theta (superlinear)
 Gradient norm tolerance reached; options.tolgradnorm = 1.28205e-09.
-Total time is 50.915837 [s] (excludes statsfun)
+Total time is 60.111613 [s] (excludes statsfun)
 – Spectral initialization
 RGD:
  iter	               cost val	    grad. norm
@@ -243,7 +338,7 @@ RGD:
    54	-1.0664433426288833e+04	1.80887752e-06
    55	-1.0664433426288833e+04	1.80887752e-06
 Last stepsize smaller than minimum allowed; options.minstepsize = 1e-10.
-Total time is 0.919982 [s] (excludes statsfun)
+Total time is 1.098577 [s] (excludes statsfun)
 RTR:
            iter                  cost val     grad. norm    numinner     hessvec   numstored   stopreason
               0   -1.0661731601652784e+04   2.375802e+01
@@ -253,7 +348,7 @@ acc           3   -1.0664433425505234e+04   8.202619e-03           2           2
 acc           4   -1.0664433426288826e+04   1.683914e-05           6           6           3   reached target residual-theta (superlinear)
 acc           5   -1.0664433426288830e+04   1.194496e-10          12          12           2   reached target residual-theta (superlinear)
 Gradient norm tolerance reached; options.tolgradnorm = 1.28205e-09.
-Total time is 25.901757 [s] (excludes statsfun)
+Total time is 30.013388 [s] (excludes statsfun)
 
 ––– Question 26 –––
            iter                  cost val     grad. norm    numinner     hessvec   numstored   stopreason
@@ -264,8 +359,6 @@ acc           3   -8.3021864233978558e+03   1.551893e-03           5           5
 acc           4   -8.3021864234140667e+03   8.711611e-07           8           8           2   reached target residual-theta (superlinear)
 acc           5   -8.3021864234140667e+03   4.069927e-13          17          17           3   reached target residual-theta (superlinear)
 Gradient norm tolerance reached; options.tolgradnorm = 1.72712e-09.
-Total time is 29.424647 [s] (excludes statsfun)
+Total time is 33.403825 [s] (excludes statsfun)
 
 ––– Question 27 –––
-1/2
-2/2
